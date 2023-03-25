@@ -1,0 +1,10 @@
+version: '3.8'
+services:
+  web:
+    build:
+      context: .
+      target: dev
+    ports:
+      - "3003:3003"
+    environment:
+      - debug=1 # BTTODO - Not sure this even does anything
