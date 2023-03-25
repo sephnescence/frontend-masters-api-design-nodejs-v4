@@ -8,6 +8,6 @@ EXPOSE 3003
 
 FROM base as dev
 ENV NODE_ENV=development
-RUN npm install
+RUN npm install -g typescript ts-node && npm install
 COPY . /
-CMD ["node", "index.js"]
+CMD ["ts-node", "index.ts"]
