@@ -8,3 +8,12 @@ services:
       - "3003:3003"
     environment:
       - debug=1 # BTTODO - Not sure this even does anything
+
+  db:
+    image: postgres:13
+    ports:
+      - "5499:5432"
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=postgres
