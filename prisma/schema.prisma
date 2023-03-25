@@ -9,3 +9,58 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+// Referred to the docs to do this - https://www.prisma.io/docs/concepts/components/prisma-schema/relations/many-to-many-relations
+model MarvelSnapCard {
+  id                           String                     @id @default(uuid())
+  name                         String
+  lifespan_start               DateTime
+  lifespan_end                 DateTime
+  snapfan_data                 Json
+  created_at                   DateTime                   @default(now())
+  updated_at                   DateTime
+  deleted_at                   DateTime
+  marvel_snap_card_card_series MarvelSnapCardCardSeries[] // @relation(fields: [id], references: [marvel_snap_card_id])
+  series                       MarvelSnapCardSeries[]
+  variants                     MarvelSnapCardVariant[]
+}
+
+model MarvelSnapCardCardSeries {
+  id                    String               @id @default(uuid())
+  marvel_snap_card      MarvelSnapCard       @relation(fields: [marvel_snap_card_id], references: [id])
+  marvel_snap_card_id   String
+  marvel_snap_series    MarvelSnapCardSeries @relation(fields: [marvel_snap_series_id], references: [id])
+  marvel_snap_series_id String
+  lifespan_start        DateTime
+  lifespan_end          DateTime
+  snapfan_data          Json
+  created_at            DateTime             @default(now())
+  updated_at            DateTime
+  deleted_at            DateTime
+}
+
+model MarvelSnapCardSeries {
+  id                           String                     @id @default(uuid())
+  name                         String
+  lifespan_start               DateTime
+  lifespan_end                 DateTime
+  created_at                   DateTime                   @default(now())
+  updated_at                   DateTime
+  deleted_at                   DateTime
+  marvel_snap_card_card_series MarvelSnapCardCardSeries[]
+  cards                        MarvelSnapCard[]
+}
+
+model MarvelSnapCardVariant {
+  id                  String         @id @default(uuid())
+  marvel_snap_card_id String
+  name                String
+  lifespan_start      DateTime
+  lifespan_end        DateTime
+  snapfan_data        Json
+  internal_data       Json
+  created_at          DateTime       @default(now())
+  updated_at          DateTime
+  deleted_at          DateTime
+  marvel_snap_card    MarvelSnapCard @relation(fields: [marvel_snap_card_id], references: [id])
+}
