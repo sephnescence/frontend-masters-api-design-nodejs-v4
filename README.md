@@ -7,7 +7,7 @@
 - `docker-compose up web` (Can simply do `docker-compose up` at the moment as we only on web and db, and web depends on db)
 
 ## Migrating
-- From your host machine, run `bash bin/migrate.sh`
+- From your host machine, run `bash bin/migrate.sh`. You will find any new migrations will appear in `prisma/migrations`
 
 ## Todos
 
