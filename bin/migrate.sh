@@ -1,1 +1,1 @@
-docker-compose run --rm web bash -c "cd .. && npx prisma migrate dev --name init"
+docker-compose run --rm web bash -c "cd .. && npx prisma migrate dev --name $1"
