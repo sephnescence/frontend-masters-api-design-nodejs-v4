@@ -4,6 +4,8 @@ services:
     build:
       context: .
       target: dev
+    depends_on:
+      - db
     ports:
       - "3003:3003"
     environment:
@@ -20,4 +22,10 @@ services:
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_DB=postgres
-      # - POSTGRES_PORT=5499
+      - POSTGRES_PORT=5499
+    volumes:
+      - 'db_data:/var/lib/postgresql/data'
+
+volumes:
+  db_data:
+    driver: local
